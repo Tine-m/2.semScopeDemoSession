@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="../product.css">
+</head>
+<body>
+<h1> Scope Demo 2 </h1>
+<h3><p>Welcome to webshop!</p></h3>
+<a href="/newProduct"> Create product </a> </br>
+<a href="/newProduct2"> Create product 2</a>
+
+<p>
+    Is session empty?
+    <th:block th:text="${session.isEmpty()} ? 'Yes' : 'No'"></th:block>
+</p>
+<p>
+    Total objects stored in current session are
+    <th:block th:text="${session.size()}"></th:block>.
+</p>
+<div th:if="${session.containsKey('basket')}" th:text="${session.basket}"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+<tr th:if="${session.containsKey('basket')}" th:each="product : ${session.basket}">
+    <td th:text="${product.description}"></td>
+    <td th:text="${product.quantity}"></td>
+</tr>
+</tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    <p>Number of visitors: <span th:text="${counter}"/>
+    </p>
+</div>
+
+</body>
+</html>
